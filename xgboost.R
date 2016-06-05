@@ -2,8 +2,12 @@ set.seed(2405)
 library(xgboost)
 library(Matrix)
 
-train <- read.csv('preprocessed_data/train.csv', header = T, colClasses = 'factor')
-test <- read.csv('preprocessed_data/test.csv', header = T, colClasses = 'factor')
+train <- read.csv('preprocessed_data/train.csv', header = T)
+test <- read.csv('preprocessed_data/test.csv', header = T)
+train$year <- as.factor(train$year)
+train$month <- as.factor(train$month)
+test$year <- as.factor(test$year)
+test$month <- as.factor(test$month)
 
 train_x <- sparse.model.matrix(outcometype~.-1, data = train)
 train_y <- as.integer(train$outcometype)-1

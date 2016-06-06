@@ -6,7 +6,10 @@ library(lubridate)
 preprocess <- function(data){
     # Make all attribute names to be in lowercase
     names(data) <- tolower(names(data))
-    
+
+    # Compute the 'hasname' attributes
+    data$hasname <- !is.na(data$name)
+
     # Remove the 'id' and 'name' attributes
     data[[1]] <- NULL
     data[[1]] <- NULL

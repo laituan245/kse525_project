@@ -27,6 +27,10 @@ preprocess <- function(data){
     
     # Compute breed attributes
     data$breed <- as.character(data$breed)
+    data$breed_count <- sapply(data$breed, function(x) {
+        tmp_vector <- strsplit(x, "/")[[1]]
+        length(tmp_vector)
+    })
     for (i in 1:length(all_breeds)) {
         data[all_breeds[i]] <- sapply(data$breed, function(c) {
             tmp_vector <- strsplit(c, "/")[[1]]
@@ -42,6 +46,10 @@ preprocess <- function(data){
 
     # Compute color attributes
     data$color <- as.character(data$color)
+    data$color_count <- sapply(data$color, function(x) {
+        tmp_vector <- strsplit(x, "/")[[1]]
+        length(tmp_vector)
+    })
     for (i in 1:length(all_colors)) {
         data[all_colors[i]] <- sapply(data$color, function(c) {
             tmp_vector <- strsplit(c, "/")[[1]]

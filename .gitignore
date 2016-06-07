@@ -4,3 +4,4 @@ preprocessed_data/
 submission\.csv
 submission_xgboost\.csv
 submission_rf\.csv
+submission_simple_voting\.csv

@@ -27,6 +27,10 @@ preprocess <- function(data){
     
     # Compute breed attributes
     data$breed <- as.character(data$breed)
+    data$is_mixed <- sapply(data$breed, function(x) {
+        length(grep(" Mix", x)) > 0
+    })
+    data$breed <- gsub(" Mix", "", data$breed)
     data$breed_count <- sapply(data$breed, function(x) {
         tmp_vector <- strsplit(x, "/")[[1]]
         length(tmp_vector)
@@ -79,6 +83,7 @@ breed2 <- sapply(tmp_breeds, function(x) {
 })
 all_breeds <- unique(c(breed1, breed2))
 all_breeds <- all_breeds[!is.na(all_breeds)]
+all_breeds <- unique(sub(" Mix", "", all_breeds))
 
 # Get all the different individual colors
 tmp_colors <- c(as.character(train_data$Color), as.character(test_data$Color))

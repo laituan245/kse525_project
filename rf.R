@@ -14,4 +14,4 @@ rf1=randomForest(outcometype ~ ., data=train, importance=TRUE, ntree=500, do.tra
 
 ypred <- predict(rf1, test, type="vote")
 res <- data.frame('ID' = 1:nrow(test), ypred)
-write.csv(res, 'submission.csv', quote = F, row.names = F)
+write.csv(res, 'submission_rf.csv', quote = F, row.names = F)

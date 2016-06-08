@@ -1,5 +1,19 @@
 set.seed(2405)
 library(lubridate)
+library(stringr)
+
+age_as_numeric <- function(age_str){
+    tmp_vector <- strsplit(age_str, " ")[[1]]
+    if (grepl("year", tmp_vector[2])){
+        multiplier <- 365
+    } else if (grepl("month", tmp_vector[2])){
+        multiplier <- 30
+    } else if (grepl("week", tmp_vector[2])){
+        multiplier <- 7
+    } else
+        multiplier <- 1
+    as.numeric(tmp_vector[1]) * multiplier
+}
 
 # This function returns the preprocessed version
 # of the original data (training dataset or test dataset)
@@ -66,6 +80,11 @@ preprocess <- function(data){
         })
     }
     data$color <- NULL
+
+    # Convert the 'ageuponoutcome' attribute from categorical attribute to numeric attribute
+    data$ageuponoutcome <- as.character(data$ageuponoutcome)
+    data$ageuponoutcome[is.na(data$ageuponoutcome)] <- "0 days"
+    data$ageuponoutcome <- sapply(data$ageuponoutcome, age_as_numeric)
 
     data
 }

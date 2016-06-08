@@ -4,7 +4,6 @@ library(Matrix)
 
 train <- read.csv('preprocessed_data/train.csv', header = T)
 test <- read.csv('preprocessed_data/test.csv', header = T)
-train$ageuponoutcome <- factor(train$ageuponoutcome, levels=c(levels(train$ageuponoutcome), "22 years"))
 train$year <- as.factor(train$year)
 train$month <- as.factor(train$month)
 test$year <- as.factor(test$year)
@@ -21,7 +20,8 @@ param <- list("objective" = "multi:softprob",
               "max_depth" = 5,
               "eta"=0.1,
               "subsample"=0.75,
-              "colsample_bytree"=0.85)
+              "colsample_bytree"=0.85,
+              "gamma" = 4)
 
 # train the model
 nround = 300

@@ -21,7 +21,7 @@ param <- list("objective" = "multi:softprob",
               "eta"=0.1,
               "subsample"=0.75,
               "colsample_bytree"=0.85,
-              "gamma" = 4)
+              "gamma" = 3)
 
 # train the model
 nround = 1000

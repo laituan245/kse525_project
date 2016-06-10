@@ -24,7 +24,7 @@ param <- list("objective" = "multi:softprob",
               "gamma" = 3)
 
 # train the model
-nround = 950
+nround = 300
 bst = xgboost(data = train_x, label = train_y, param=param, nrounds = nround)
 cv = xgb.cv(data = train_x, label = train_y, param=param, nrounds = nround, nfold = 5)
 

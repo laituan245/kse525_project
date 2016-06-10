@@ -33,7 +33,7 @@ preprocess <- function(data){
     
     # Compute the 'year', 'month', and 'isweekend' attributes
     # from the original 'datetime' attribute
-    data$datetime <- as.Date(data$datetime)
+    data$hour <- factor(hour(data$datetime))
     data$year <- factor(year(data$datetime))
     data$month <- factor(month(data$datetime))
     data$isweekend <- factor(wday(data$datetime) %in% c(1, 7))
@@ -52,6 +52,15 @@ preprocess <- function(data){
     })
     data$is_aggressive <- sapply(data$breed, function(x) {
         length(grep("Rottweiler", x)) + length(grep("Pit Bull", x)) + length(grep("Siberian Husky", x))> 0
+    })
+    data$has_shorthair <- sapply(data$breed, function(x) {
+        length(grep("Shorthair", x)) > 0
+    })
+    data$has_mediumhair <- sapply(data$breed, function(x) {
+        length(grep("Medium Hair", x)) > 0
+    })
+    data$has_longhair <- sapply(data$breed, function(x) {
+        length(grep("Longhair", x)) > 0
     })
     data$breed_count <- sapply(data$breed, function(x) {
         tmp_vector <- strsplit(x, "/")[[1]]

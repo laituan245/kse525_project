@@ -18,13 +18,13 @@ param <- list("objective" = "multi:softprob",
               "eval_metric" = "mlogloss",
               "num_class" = 5,
               "max_depth" = 6,
-              "eta"=0.1,
+              "eta"=0.08,
               "subsample"=0.75,
               "colsample_bytree"=0.85,
               "gamma" = 3)
 
 # train the model
-nround = 300
+nround = 325
 bst = xgboost(data = train_x, label = train_y, param=param, nrounds = nround)
 cv = xgb.cv(data = train_x, label = train_y, param=param, nrounds = nround, nfold = 5)
 

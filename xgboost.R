@@ -17,14 +17,14 @@ test_x <- sparse.model.matrix(~.-1, data = test)
 param <- list("objective" = "multi:softprob",
               "eval_metric" = "mlogloss",
               "num_class" = 5,
-              "max_depth" = 5,
+              "max_depth" = 6,
               "eta"=0.1,
               "subsample"=0.75,
               "colsample_bytree"=0.85,
               "gamma" = 3)
 
 # train the model
-nround = 1000
+nround = 950
 bst = xgboost(data = train_x, label = train_y, param=param, nrounds = nround)
 cv = xgb.cv(data = train_x, label = train_y, param=param, nrounds = nround, nfold = 5)
 

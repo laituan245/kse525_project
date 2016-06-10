@@ -50,14 +50,8 @@ preprocess <- function(data){
         length(tmp_vector)
     })
     for (i in 1:length(all_breeds)) {
-        data[all_breeds[i]] <- sapply(data$breed, function(c) {
-            tmp_vector <- strsplit(c, "/")[[1]]
-            if (tmp_vector[1] == all_breeds[i])
-                TRUE
-            else if (length(tmp_vector) > 1 && tmp_vector[2] == all_breeds[i])
-                TRUE
-            else
-                FALSE
+        data[all_breeds[i]] <- sapply(data$breed, function(b) {
+            length(grep(all_breeds[i], b)) > 0
         })
     }
     data$breed <- NULL
@@ -70,13 +64,7 @@ preprocess <- function(data){
     })
     for (i in 1:length(all_colors)) {
         data[all_colors[i]] <- sapply(data$color, function(c) {
-            tmp_vector <- strsplit(c, "/")[[1]]
-            if (tmp_vector[1] == all_colors[i])
-                TRUE
-            else if (length(tmp_vector) > 1 && tmp_vector[2] == all_colors[i])
-                TRUE
-            else
-                FALSE
+            length(grep(all_colors[i], c)) > 0
         })
     }
     data$color <- NULL

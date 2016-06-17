@@ -11,6 +11,10 @@ test$month <- as.factor(test$month)
 
 rf1=randomForest(outcometype ~ ., data=train, importance=TRUE, ntree=800, do.trace = 5)
 
+ypred <- predict(rf1, train, type="vote")
+res <- data.frame('ID' = 1:nrow(train), ypred)
+write.csv(res, 'training_predictions_rf.csv', quote = F, row.names = F)
+
 ypred <- predict(rf1, test, type="vote")
 res <- data.frame('ID' = 1:nrow(test), ypred)
 write.csv(res, 'submission_rf.csv', quote = F, row.names = F)

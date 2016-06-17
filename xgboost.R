@@ -28,6 +28,13 @@ nround = 325
 bst = xgboost(data = train_x, label = train_y, param=param, nrounds = nround)
 cv = xgb.cv(data = train_x, label = train_y, param=param, nrounds = nround, nfold = 5)
 
+# generating predictions on the training dataset (for stacking)
+ypred = predict(bst, train_x)
+m = as.data.frame( t ( matrix(ypred, ncol = nrow(train), nrow = 5) ) )
+colnames(m) = c("Adoption","Died","Euthanasia","Return_to_owner","Transfer")
+train_predictions = cbind(ID=1:nrow(train), m)
+write.csv(train_predictions, file="training_predictions_xgboost.csv", row.names=FALSE, quote=FALSE)
+
 # doing prediction
 ypred = predict(bst, test_x)
 m = as.data.frame( t ( matrix(ypred, ncol = 11456, nrow = 5) ) )

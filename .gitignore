@@ -5,3 +5,6 @@ submission\.csv
 submission_xgboost\.csv
 submission_rf\.csv
 submission_simple_voting\.csv
+submission_logreg_stacking\.csv
+training_predictions_xgboost\.csv
+training_predictions_rf\.csv
